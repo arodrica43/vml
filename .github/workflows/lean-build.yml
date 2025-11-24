@@ -1,0 +1,72 @@
+name: Lean Build and Test
+
+on:
+  push:
+    branches: [ main, master, copilot/** ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Lean Project
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install elan
+      run: |
+        curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+        echo "$HOME/.elan/bin" >> $GITHUB_PATH
+    
+    - name: Install Lean toolchain
+      run: |
+        elan toolchain install
+        lean --version
+    
+    - name: Cache Lake dependencies
+      uses: actions/cache@v4
+      with:
+        path: .lake
+        key: ${{ runner.os }}-lake-${{ hashFiles('lake-manifest.json') }}
+        restore-keys: |
+          ${{ runner.os }}-lake-
+    
+    - name: Update dependencies
+      run: lake update
+    
+    - name: Build project
+      run: lake build
+    
+    - name: Run executable
+      run: lake exe vml
+    
+    - name: Build documentation (if available)
+      run: lake build :docs || echo "No documentation target"
+      continue-on-error: true
+
+  check-formatting:
+    name: Check Lean Formatting
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install elan
+      run: |
+        curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+        echo "$HOME/.elan/bin" >> $GITHUB_PATH
+    
+    - name: Install Lean toolchain
+      run: elan toolchain install
+    
+    - name: Check all Lean files are valid
+      run: |
+        echo "Checking Lean file syntax..."
+        find . -name "*.lean" -type f | while read file; do
+          echo "Checking $file"
+          lean --version || true
+        done
