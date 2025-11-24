@@ -6,7 +6,9 @@
 .lake-*
 
 # Editor files
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 *.swp
 *.swo
 *~
