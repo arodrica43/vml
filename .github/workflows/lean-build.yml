@@ -28,7 +28,7 @@ jobs:
     
     - name: Install Lean toolchain
       run: |
-        elan toolchain install
+        elan default $(cat lean-toolchain)
         lean --version
     
     - name: Cache Lake dependencies
@@ -68,7 +68,7 @@ jobs:
         echo "$HOME/.elan/bin" >> $GITHUB_PATH
     
     - name: Install Lean toolchain
-      run: elan toolchain install
+      run: elan default $(cat lean-toolchain)
     
     - name: Check all Lean files are valid
       run: |
