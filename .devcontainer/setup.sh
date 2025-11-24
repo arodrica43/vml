@@ -17,6 +17,7 @@ echo 'export PATH="$HOME/.elan/bin:$PATH"' >> ~/.zshrc
 # Install Lean based on lean-toolchain file
 echo "Installing Lean toolchain..."
 cd /workspaces/vml
+elan toolchain install $(cat lean-toolchain)
 elan default $(cat lean-toolchain)
 
 # Fetch dependencies
