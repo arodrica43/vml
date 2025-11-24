@@ -1,0 +1,41 @@
+{
+  "name": "Lean 4 - Homotopy Type Theory",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "leanprover.lean4",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "lean4.serverEnv": {
+          "LEAN_PATH": "/workspace/.lake/packages"
+        },
+        "lean4.elaboration.trace": "warning",
+        "editor.formatOnSave": false,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000
+      }
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  
+  "remoteUser": "vscode",
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/.lake,target=/workspace/.lake,type=bind,consistency=cached"
+  ]
+}

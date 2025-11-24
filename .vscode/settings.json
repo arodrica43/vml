@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": false,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "lean4.elaboration.trace": "warning",
+  "lean4.serverEnv": {
+    "LEAN_PATH": "${workspaceFolder}/.lake/packages"
+  },
+  "[lean4]": {
+    "editor.wordWrap": "on"
+  },
+  "files.exclude": {
+    "**/.lake": true,
+    "**/build": true
+  }
+}
