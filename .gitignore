@@ -1,0 +1,22 @@
+# Lean build artifacts
+/.lake
+/build
+/lake-packages
+*.olean
+.lake-*
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
