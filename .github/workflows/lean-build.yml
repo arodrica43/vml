@@ -7,10 +7,15 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build Lean Project
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
@@ -50,6 +55,8 @@ jobs:
   check-formatting:
     name: Check Lean Formatting
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
