@@ -38,8 +38,8 @@ If you prefer to work locally:
 # Install elan (Lean version manager)
 curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
 
-# Clone the repository
-git clone https://github.com/arodrica43/vml.git
+# Clone the repository (replace {username} with your GitHub username if forked)
+git clone https://github.com/{username}/vml.git
 cd vml
 
 # Install dependencies and build

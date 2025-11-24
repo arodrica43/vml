@@ -108,14 +108,12 @@ theorem transport_comp {A : Type u} (P : A → Type v)
   cases p; cases q; rfl
 
 /--
-Transport along inverse path.
-Note: This shows that transport along p⁻¹ is well-defined.
-For the full inverse property, we need to show:
-  transport P (p⁻¹) (transport P p u) = u
+Transport along inverse path is the inverse of transport.
+This fundamental property shows that transport P (p⁻¹) inverts transport P p.
 -/
 theorem transport_inv {A : Type u} (P : A → Type v) 
     {x y : A} (p : x ≈ y) (u : P x) :
-    transport P p (transport P (p⁻¹) (transport P p u)) = transport P p u := by
+    transport P (p⁻¹) (transport P p u) = u := by
   cases p; rfl
 
 end HoTT

@@ -87,7 +87,7 @@ def compEquiv {A B C : Type u} (f : A ≃ B) (g : B ≃ C) : A ≃ C where
     center := 
       let ⟨y, qy⟩ := (g.isEquiv z).center
       let ⟨x, px⟩ := (f.isEquiv y).center
-      ⟨x, by simp [qy, px]⟩
+      ⟨x, show g.toFun (f.toFun x) = z from qy ▸ px⟩
     contr := fun ⟨x, p⟩ => by
       -- TODO: Complete proof by showing uniqueness of preimages through composition
       sorry
