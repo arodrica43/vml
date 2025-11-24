@@ -3,10 +3,15 @@
 
 Type equivalences and related concepts from Homotopy Type Theory.
 Equivalences are the "isomorphisms" in HoTT.
+
+Note: Some proofs use `sorry` as they require additional infrastructure
+beyond the scope of this basic setup. These are marked with TODO comments.
 -/
 
 import VML.HoTT.Basic
 import VML.HoTT.PathAlgebra
+
+universe u v
 
 namespace HoTT
 
@@ -73,6 +78,8 @@ def idEquiv (A : Type u) : A ≃ A where
 
 /--
 Equivalences are closed under composition.
+TODO: Full proof requires showing that composition of equivalences has contractible fibers.
+This involves manipulating dependent pairs and using the contractibility of the component fibers.
 -/
 def compEquiv {A B C : Type u} (f : A ≃ B) (g : B ≃ C) : A ≃ C where
   toFun := g.toFun ∘ f.toFun
@@ -82,17 +89,20 @@ def compEquiv {A B C : Type u} (f : A ≃ B) (g : B ≃ C) : A ≃ C where
       let ⟨x, px⟩ := (f.isEquiv y).center
       ⟨x, by simp [qy, px]⟩
     contr := fun ⟨x, p⟩ => by
-      sorry -- Full proof requires more infrastructure
+      -- TODO: Complete proof by showing uniqueness of preimages through composition
+      sorry
   }
 
 /--
 Equivalences can be inverted.
+TODO: Full proof requires extracting an inverse function from contractible fibers
+and showing it also has contractible fibers.
 -/
 def invEquiv {A B : Type u} (f : A ≃ B) : B ≃ A where
   toFun := fun y => (f.isEquiv y).center.1
   isEquiv := fun x => {
-    center := sorry -- Requires full proof
-    contr := fun _ => sorry
+    center := sorry -- TODO: Construct the fiber over x using f
+    contr := fun _ => sorry -- TODO: Show uniqueness using contractibility of f's fibers
   }
 
 /-! ## Univalence Axiom (Stated) -/
@@ -112,15 +122,19 @@ def univalence_statement (A B : Type u) : Prop :=
 /--
 Quasi-isomorphisms are equivalences.
 This is one of the fundamental characterizations of equivalence.
+TODO: Proof requires showing that having a quasi-inverse implies contractible fibers.
+See HoTT book Theorem 4.1.1 for full proof.
 -/
 theorem qinv_to_equiv {A B : Type u} (f : A → B) (qinv : QInv f) : IsEquiv f := by
-  sorry -- Full proof requires contractibility arguments
+  sorry -- TODO: Construct contractible fiber using left/right inverses
 
 /--
 Equivalences give quasi-isomorphisms.
+TODO: Proof requires extracting a quasi-inverse from contractible fibers.
+See HoTT book Theorem 4.1.1 for full proof.
 -/
 theorem equiv_to_qinv {A B : Type u} (f : A → B) (equiv : IsEquiv f) : QInv f := by
-  sorry -- Full proof requires extracting inverse from contractible fibers
+  sorry -- TODO: Extract inverse function from fiber centers and prove homotopies
 
 /-! ## Function Extensionality -/
 

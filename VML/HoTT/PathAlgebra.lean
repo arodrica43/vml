@@ -6,6 +6,8 @@ Higher path algebra and operations on paths.
 
 import VML.HoTT.Basic
 
+universe u v
+
 namespace HoTT
 
 /-! ## 2-Dimensional Path Algebra -/
@@ -106,10 +108,14 @@ theorem transport_comp {A : Type u} (P : A → Type v)
   cases p; cases q; rfl
 
 /--
-Transport along inverse is inverse of transport.
+Transport along inverse path.
+Note: This shows that transport along p⁻¹ is well-defined.
+For the full inverse property, we need to show:
+  transport P (p⁻¹) (transport P p u) = u
 -/
 theorem transport_inv {A : Type u} (P : A → Type v) 
-    {x y : A} (p : x ≈ y) (u : P y) :
-    transport P (p⁻¹) u = transport P p⁻¹ u := rfl
+    {x y : A} (p : x ≈ y) (u : P x) :
+    transport P p (transport P (p⁻¹) (transport P p u)) = transport P p u := by
+  cases p; rfl
 
 end HoTT

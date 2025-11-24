@@ -8,6 +8,8 @@ import VML.HoTT.Basic
 import VML.HoTT.PathAlgebra
 import VML.HoTT.Equivalences
 
+universe u v
+
 namespace HoTT.Examples
 
 open HoTT
@@ -161,11 +163,16 @@ theorem assoc_2path {A : Type u} {w x y z : A}
   assoc p q r
 
 /--
-Exercise: Prove the interchange law for 2-paths.
+Exercise: The interchange law for 2-paths.
+This shows that in a 2-category, the two ways of composing
+a 2×2 grid of 2-paths are equal.
+TODO: This requires more infrastructure for proper statement.
 -/
-theorem interchange {A : Type u} {x y z : A} 
+theorem interchange_simplified {A : Type u} {x y z : A} 
     {p q : x ≈ y} {r s : y ≈ z}
     (α : p ≈₂ q) (β : r ≈₂ s) :
-    hcomp α β = hcomp α β := rfl
+    hcomp α β = hcomp α β := by
+  -- This is trivially true; the full interchange law needs more structure
+  rfl
 
 end HoTT.Examples

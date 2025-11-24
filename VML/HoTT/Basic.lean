@@ -5,6 +5,8 @@ This file contains basic definitions and theorems for Homotopy Type Theory (HoTT
 HoTT interprets types as spaces, terms as points, and equalities as paths.
 -/
 
+universe u v w
+
 namespace HoTT
 
 /-! ## Identity Types and Paths -/
